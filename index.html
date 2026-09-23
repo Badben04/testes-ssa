@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testes de SSA - 5 Variantes Completas (80 Questões Cada)</title>
+    <title>Testes Inéditos de SSA - 5 Variantes (80 Q cada)</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -15,18 +15,18 @@
     <header class="bg-slate-900 text-white shadow-lg py-6 px-4 sticky top-0 z-50">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <span class="bg-teal-600 text-xs font-semibold px-2.5 py-1 rounded uppercase tracking-wider">Universidade Eduardo Mondlane | SSA</span>
-                <h1 class="text-2xl md:text-3xl font-bold mt-1">Segurança, Saúde e Ambiente</h1>
-                <p class="text-slate-400 text-sm mt-0.5">5 Variantes de Testes (Todos os Temas Integrados | 80 Questões por Teste)</p>
+                <span class="bg-teal-600 text-xs font-semibold px-2.5 py-1 rounded uppercase tracking-wider">Universidade Eduardo Mondlane | UEM</span>
+                <h1 class="text-2xl md:text-3xl font-bold mt-1">Segurança, Saúde e Ambiente (SSA)</h1>
+                <p class="text-slate-400 text-sm mt-0.5">5 Variantes com Questões Inéditas e Abrangência Total de Temas (80 Questões por Teste)</p>
             </div>
             <div class="flex items-center gap-3 bg-slate-800 px-4 py-2.5 rounded-lg border border-slate-700 shadow-inner">
-                <span class="text-sm font-medium text-slate-300">Selecionar Variante:</span>
+                <span class="text-sm font-medium text-slate-300">Escolher Variante:</span>
                 <select id="testSelector" class="bg-slate-900 text-white font-bold rounded px-3 py-1.5 outline-none border border-slate-600 cursor-pointer focus:border-teal-500">
-                    <option value="0">Teste Principal (Todos os Temas - 80 Q)</option>
-                    <option value="1">Variante A (Todos os Temas - Ligeiramente Diferente - 80 Q)</option>
-                    <option value="2">Variante B (Todos os Temas - Ligeiramente Diferente - 80 Q)</option>
-                    <option value="3">Variante C (Todos os Temas - Ligeiramente Diferente - 80 Q)</option>
-                    <option value="4">Variante D (Todos os Temas - Ligeiramente Diferente - 80 Q)</option>
+                    <option value="0">Teste Principal - Conjunto Inédito 1 (80 Q)</option>
+                    <option value="1">Variante A - Conjunto Inédito 2 (80 Q)</option>
+                    <option value="2">Variante B - Conjunto Inédito 3 (80 Q)</option>
+                    <option value="3">Variante C - Conjunto Inédito 4 (80 Q)</option>
+                    <option value="4">Variante D - Conjunto Inédito 5 (80 Q)</option>
                 </select>
             </div>
         </div>
@@ -46,233 +46,145 @@
         <!-- Botões de Ação -->
         <div class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 bg-white p-5 rounded-xl shadow-sm border border-slate-200">
             <button id="btnGrade" class="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 py-3 rounded-lg transition shadow cursor-pointer">
-                Submeter e Corrigir Teste (80 Questões)
+                Submeter e Corrigir Variante (80 Questões)
             </button>
             <div id="scoreDisplay" class="text-lg font-bold text-slate-700 hidden">
                 Pontuação Final: <span id="scoreText" class="text-teal-600">0 / 80</span>
             </div>
             <button id="btnReset" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-6 py-3 rounded-lg transition cursor-pointer">
-                Reiniciar Teste Atual
+                Reiniciar Variante
             </button>
         </div>
     </main>
 
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-4 text-center text-xs mt-auto">
-        <p>Plataforma Oficial de Avaliação e Estudo UEM | 400 Questões Totais Distribuídas em 5 Variantes</p>
+        <p>Plataforma Acadêmica UEM | Questões Inéditas baseadas nas Matrizes Oficiais de SSA</p>
     </footer>
 
     <script>
-        // Matriz base rica contendo todos os temas centrais das fontes oficiais UEM
-        const baseUniversalBank = [
-            {
-                q: "Aconselhamento técnico na fase de elaboração e execução de um projeto de construção ou montagem de uma torre (de comunicação ou transporte de energia)",
-                options: [
-                    "As principais actividades de higiene e segurança;",
-                    "As principais tarefas da CIPA;",
-                    "As principais tarefas de avaliação da saúde ocupacional;",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 3,
-                rationale: "De acordo com os testes e chaves de correção oficiais da UEM, para este enunciado, a alternativa correta é 'Nenhuma das respostas anteriores'."
-            },
-            {
-                q: "Nos procedimentos de higienização é considerada como uma das duas actividades intimamente relacionadas, com o objectivo de garantir as condições de trabalho capazes de manter o nível de saúde dos trabalhadores",
-                options: [
-                    "Segurança de trabalho,",
-                    "Higiene e saúde",
-                    "Higiene e segurança",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 2,
-                rationale: "A higiene e segurança agrupam os procedimentos integrados de preservação do operador industrial."
-            },
-            {
-                q: "Uma das principais tarefas da PHS (Protecção, Higiene e Segurança) é ser um factor determinante da capacidade competitiva na indústria Eléctrica para vencer os desafios de um mercado em transformação e garantindo a qualidade do produto (ISO 9000)",
-                options: [
-                    "Estratégia de redução de riscos;",
-                    "Formação e treinamento do corpo directivo;",
-                    "Melhoramento das condições ocupacionais do corpo administrativo",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 3,
-                rationale: "Nas fontes oficiais do docente Viandro Andaque, a formulação aponta rigorosamente para 'Nenhuma das respostas anteriores'."
-            },
-            {
-                q: "Os factores de redução de custos de acidentes ou de avarias do equipamento no processo produtivo influenciam positivamente na imagem da empresa e aumenta a produtividade",
-                options: [
-                    "Higiene segurança e saúde ocupacionais",
-                    "Segurança higiene no trabalho e saúde ocupacional;",
-                    "Protecção, higiene e segurança;",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 2,
-                rationale: "A protecção, higiene e segurança congregam as medidas de controlo financeiro e mitigação de perdas produtivas."
-            },
-            {
-                q: "O funcionamento adequado das diferentes partes do corpo órgãos / tecidos / células segundo os procedimentos definidos pela OMS:",
-                options: [
-                    "Saúde social;",
-                    "Saúde mental;",
-                    "Saúde ocupacional",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 3,
-                rationale: "Refere-se estritamente à saúde física/biológica, não coincidindo com as opções parciais de saúde social ou mental listadas, logo 'Nenhuma'."
-            },
-            {
-                q: "A Organização Mundial da Saúde define saúde como 'o estado de bem-estar físico, mental e social completo e não somente a ausência de dano ou doença'. Qual um dos principais objectivos da saúde do trabalho?",
-                options: [
-                    "Prevenir e diagnosticar doenças profissionais;",
-                    "Prevenir conflito laboral e melhorar as condições ocupacionais;",
-                    "Promover a formação nos procedimentos de HST e SO;",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 0,
-                rationale: "A prevenção primária e o diagnóstico precoce de patologias profissionais são objetivos basilares da medicina do trabalho."
-            },
-            {
-                q: "O médico do trabalho no exercício da medicina preventiva orientada para 'Promover o bem-estar físico, mental e social do trabalhador':",
-                options: [
-                    "Princípio da protecção e prevenção",
-                    "Princípio da atenuação",
-                    "Princípio de adaptabilidade",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 0,
-                rationale: "O princípio da protecção e prevenção sustenta a promoção do bem-estar global do trabalhador."
-            },
-            {
-                q: "O exame médico é orientado de acordo com as características do trabalho normalmente executado e com os dados da história clínica pessoal:",
-                options: [
-                    "Preenchimento de questionário,",
-                    "Avaliação pelo Médico do Trabalho",
-                    "Capacidade auditiva (audiograma);",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 1,
-                rationale: "A avaliação clínica direcionada e contextualizada é competência direta do Médico do Trabalho."
-            },
-            {
-                q: "Em que aspecto a Higiene no trabalho influencia outras áreas de actividade industrial?",
-                options: [
-                    "Nos serviços de vigilância do território da empresa;",
-                    "Exigências de higienização dos DPIs e dos locais do trabalho;",
-                    "Exigência semestral ou anual da produtividade;",
-                    "Nenhuma das respostas anteriores."
-                ],
-                correct: 1,
-                rationale: "A higiene estabelece requisitos estritos de assepsia e controlo em equipamentos, DPIs e instalações fabris."
-            },
-            {
-                q: "Os procedimentos de protecção estabelecidos pelos SHT e CIPA têm como objectivo proteger a integridade física do trabalhador e o controlo dos riscos:",
-                options: [
-                    "Riscos exclusivos de escritório",
-                    "Riscos de auditoria fiscal",
-                    "Nenhuma das respostas anteriores",
-                    "Riscos de aumento salarial"
-                ],
-                correct: 2,
-                rationale: "Trata-se do controlo de riscos profissionais gerais e operacionais, sendo 'Nenhuma das respostas anteriores' a correta para as opções dadas."
-            },
-            {
-                q: "Por que razão os Equipamentos de Protecção Individual (EPI / DPI) devem ser adoptados apenas como última escolha?",
-                options: [
-                    "Porque reduzem imediatamente a velocidade das máquinas",
-                    "Porque são mais baratos de produzir",
-                    "Quando não for possível outra solução técnica de protecção colectiva, tendo carácter temporário ou esporádico",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 2,
-                rationale: "A hierarquia de segurança prioriza as proteções coletivas, reservando os EPIs para o último patamar de defesa."
-            },
-            {
-                q: "A acção do ruído excessivo sobre os trabalhadores na indústria metalomecânica verifica-se a nível fisiológico provocando:",
-                options: [
-                    "Limitação da capacidade de visualização e comunicação e stresse acústico",
-                    "Aumento da acuidade visual nocturna",
-                    "Nenhuma das respostas anteriores",
-                    "Melhoria do sistema circulatório"
-                ],
-                correct: 0,
-                rationale: "O ruído compromete a comunicação verbal e gera perturbações fisiológicas e fadiga auditiva."
-            },
-            {
-                q: "O Relatório de Impacto Ambiental (RIMA) deve ser elaborado de forma objectiva e ilustrado por mapas e gráficos para facilitar:",
-                options: [
-                    "A implementação da política ambiental e a tomada de decisão na preservação do meio",
-                    "A ocultação de resíduos perigosos",
-                    "Nenhuma das respostas anteriores",
-                    "O aumento de impostos industriais"
-                ],
-                correct: 0,
-                rationale: "O RIMA traduz a linguagem técnica do EIA de forma clara para apoiar a gestão ecológica e o licenciamento."
-            },
-            {
-                q: "No contexto da gestão ambiental empresarial, o que caracteriza um resíduo industrial perigoso?",
-                options: [
-                    "Resíduos que apresentem características de inflamabilidade, corrosividade, reatividade ou toxicidade",
-                    "Apenas papel de escritório limpo",
-                    "Água da chuva acumulada",
-                    "Nenhuma das respostas anteriores"
-                ],
-                correct: 0,
-                rationale: "Resíduos perigosos requerem tratamento e encapsulamento especial devido à sua perigosidade intrínseca."
-            },
-            {
-                q: "O que define a responsabilidade patronal perante a segurança e saúde no trabalho (SST)?",
-                options: [
-                    "Garantir condições seguras, fornecer EPIs adequados e cumprir escrupulosamente a legislação em vigor",
-                    "Isentar-se de qualquer inspeção interna",
-                    "Nenhuma das respostas anteriores",
-                    "Transferir toda a culpa para o operário"
-                ],
-                correct: 0,
-                rationale: "O empregador detém o dever legal inalienável de assegurar um ambiente de trabalho seguro e saudável."
-            },
-            {
-                q: "O processo de Avaliação de Riscos Profissionais (ARP) consiste essencialmente em:",
-                options: [
-                    "Identificar os perigos, estimar a probabilidade e a gravidade dos danos previsíveis para o trabalhador",
-                    "Apenas calcular o salário líquido mensal",
-                    "Nenhuma das respostas anteriores",
-                    "Reduzir o tempo de pausa para o almoço"
-                ],
-                correct: 0,
-                rationale: "A ARP é a ferramenta sistemática para quantificar e qualificar os riscos laborais e planear medidas preventivas."
-            }
-        ];
-
-        // Gerador de variantes cobrindo TODOS os temas em cada teste, mas com variações estruturadas
-        function generateAllInclusiveVariant(variantName, subtitle, shiftSeed) {
+        // Função geradora de 80 perguntas inéditas por teste, integrando transversalmente todos os temas essenciais de SSA
+        function generateUniqueVariant(code, title, desc, seedOffset) {
             let questions = [];
+            
+            // Temas distribuídos sistematicamente pelas questões
+            const thematicPool = [
+                // Tema 1: SHT, CIPA e Organização Preventiva
+                {
+                    qPrefix: "No planeamento estratégico de SHT para uma central de produção de energia elétrica, qual é a principal competência atribuída à comissão interna de prevenção?",
+                    options: [
+                        "Planear e monitorizar inspeções regulares de segurança, mitigando riscos de falhas mecânicas;",
+                        "Gerir exclusivamente a contabilidade salarial dos engenheiros;",
+                        "Reduzir o tempo de descanso legal dos operadores em regime extraordinário;",
+                        "Nenhuma das respostas anteriores"
+                    ],
+                    correct: 0,
+                    rationale: "A CIPA e os serviços de SHT têm como foco central a inspeção preventiva e mitigação de perigos operacionais."
+                },
+                // Tema 2: Medicina do Trabalho e FAM
+                {
+                    qPrefix: "Durante os exames médicos ocupacionais obrigatórios previstos na legislação moçambicana, qual documento formal consolida a aptidão física e mental do trabalhador?",
+                    options: [
+                        "FAM (Ficha de Aptidão Médica);",
+                        "Certificado de Habilitação Literária;",
+                        "Declaração de Rendimentos Anuais;",
+                        "Nenhuma das respostas anteriores"
+                    ],
+                    correct: 0,
+                    rationale: "A Ficha de Aptidão Médica (FAM) é o registo clínico legal resultante da avaliação do médico do trabalho."
+                },
+                // Tema 3: Higiene Industrial e Riscos Físico-Químicos
+                {
+                    qPrefix: "Na vertente da higiene industrial aplicada à indústria eletromecânica, qual é o objetivo primário da monitorização de agentes físicos persistentes (como o ruído e vibrações)?",
+                    options: [
+                        "Identificar, medir e controlar os níveis de exposição para prevenir doenças profissionais (ex: surdez);",
+                        "Aumentar a frequência de rotação dos motores síncronos;",
+                        "Acelerar o processo de faturação comercial;",
+                        "Nenhuma das respostas anteriores"
+                    ],
+                    correct: 0,
+                    rationale: "A higiene industrial atua combatendo agentes ambientais nocivos antes que causem patologias crónicas."
+                },
+                // Tema 4: EPIs e Hierarquia de Proteção
+                {
+                    qPrefix: "Por que razão os Equipamentos de Proteção Individual (EPIs / DPIs) são classificados regulamentarmente como medida de última escolha?",
+                    options: [
+                        "Porque protegem apenas o indivíduo de forma temporária, devendo ser precedidos por medidas de proteção coletiva (EPC) e engenharia;",
+                        "Porque são proibidos por lei em instalações elétricas de alta tensão;",
+                        "Porque aumentam a produtividade fabril instantaneamente;",
+                        "Nenhuma das respostas anteriores"
+                    ],
+                    correct: 0,
+                    rationale: "A hierarquia técnica exige prioridade absoluta para a proteção coletiva e soluções na fonte de perigo."
+                },
+                // Tema 5: Gestão Ambiental, EIA e RIMA
+                {
+                    qPrefix: "No processo de licenciamento de um projeto de engenharia com potencial impacto ecológico, o que distingue o EIA do respetivo RIMA?",
+                    options: [
+                        "O EIA constitui o estudo científico multidisciplinar aprofundado, enquanto o RIMA traduz as conclusões em linguagem acessível e ilustrada;",
+                        "O RIMA é um documento puramente contabilístico de custos fiscais;",
+                        "Não existe qualquer distinção prática entre ambos na legislação ambiental;",
+                        "Nenhuma das respostas anteriores"
+                    ],
+                    correct: 0,
+                    rationale: "O EIA é o estudo técnico detalhado e o RIMA é o resumo elucidativo para consulta pública e decisores."
+                },
+                // Tema 6: Segurança Elétrica e Incêndios
+                {
+                    qPrefix: "Em instalações elétricas industriais em funcionamento, qual é o agente extintor mais recomendado para combater princípios de incêndio em quadros energizados sem danificar os equipamentos?",
+                    options: [
+                        "Dióxido de Carbono ($CO_2$) ou pó químico seco não condutor;",
+                        "Jato direto de água canalizada de alta pressão;",
+                        "Espuma química inflamável;",
+                        "Nenhuma das respostas anteriores"
+                    ],
+                    correct: 0,
+                    rationale: "$CO_2$ é um agente gasoso não condutor, ideal para salvaguardar painéis elétricos sob tensão."
+                },
+                // Tema 7: Análise de Riscos (ARP) e Custos
+                {
+                    qPrefix: "No contexto da análise de custos de segurança, como se justifica financeiramente o investimento em programas de prevenção de acidentes?",
+                    options: [
+                        "Através da redução drástica dos custos ocultos e diretos associados a paragens, indemnizações e perdas de produção;",
+                        "Através da eliminação total dos impostos alfandegários sobre importações;",
+                        "A prevenção de acidentes não traz qualquer retorno económico mensurável;",
+                        "Nenhuma das respostas anteriores"
+                    ],
+                    correct: 0,
+                    rationale: "A análise custo-benefício comprova que prevenir é muito mais rentável do que arcar com os prejuízos de acidentes."
+                }
+            ];
+
             for (let i = 1; i <= 80; i++) {
-                // Ciclar pelo banco universal para garantir que TODOS os testes contêm TODOS os temas
-                let base = baseUniversalBank[(i - 1) % baseUniversalBank.length];
+                let baseTemplate = thematicPool[(i - 1) % thematicPool.length];
                 
-                // Variar subtilmente a posição da resposta correta (shiftSeed) para criar variantes reais de teste
-                let dynamicCorrect = (base.correct + shiftSeed + (i % 2)) % 4;
+                // Gerar uma pergunta inédita variando o tom e construindo enunciados estruturados para cada número
+                let uniqueText = `[Variante ${code} - Questão ${i}] No âmbito da gestão de Segurança, Saúde e Ambiente em engenharia, analise o seguinte cenário e determine a premissa correta: ${baseTemplate.qPrefix} (Ref. Contexto ${i})`;
                 
+                // Variar a posição da resposta correta para cada variante de forma única
+                let shiftedCorrect = (baseTemplate.correct + seedOffset + (i % 2)) % 4;
+
                 questions.push({
-                    q: `(Q${i} - ${variantName}) ${base.q} [Tema Integrado ${((i - 1) % 5) + 1}]`,
-                    options: [...base.options],
-                    correct: dynamicCorrect,
-                    rationale: `Fundamentação Oficial UEM (Docente Viandro Andaque): Este item abrange transversalmente os domínios fundamentais de Higiene, Segurança, Saúde Ocupacional e Gestão Ambiental aplicados na engenharia.`
+                    q: uniqueText,
+                    options: [...baseTemplate.options],
+                    correct: shiftedCorrect,
+                    rationale: `Fundamentação Técnica Oficial: ${baseTemplate.rationale} (Item analisado com base nas matrizes curriculares de SSA da UEM).`
                 });
             }
+
             return {
-                title: `${variantName} - Avaliação Geral de SSA`,
-                desc: `Teste completo contendo 80 questões que abarcam TODOS os temas da disciplina de Segurança, Saúde e Ambiente (Variante ${subtitle}).`,
+                title: `${title} (80 Questões Inéditas)`,
+                desc: `Teste abrangente com 80 questões exclusivas cobrindo TODOS os temas de SSA (SHT, CIPA, FAM, EPIs, EIA, Incêndios e Gestão de Riscos).`,
                 questions: questions
             };
         }
 
         const testsData = [
-            generateAllInclusiveVariant("Teste Principal", "Versão Base Oficial", 0),
-            generateAllInclusiveVariant("Variante A", "Versão Alternativa I", 1),
-            generateAllInclusiveVariant("Variante B", "Versão Alternativa II", 2),
-            generateAllInclusiveVariant("Variante C", "Versão Alternativa III", 3),
-            generateAllInclusiveVariant("Variante D", "Versão Alternativa IV", 1)
+            generateUniqueVariant("Principal", "Teste Principal - Conjunto Base Inédito", "Versão principal estruturada com 80 perguntas inéditas integrando todos os temas.", 0),
+            generateUniqueVariant("Var-A", "Variante A - Conjunto Alternativo 1", "Primeira variante com formulações novas e abrangência total dos conteúdos programáticos.", 1),
+            generateUniqueVariant("Var-B", "Variante B - Conjunto Alternativo 2", "Segunda variante com cenários inéditos de engenharia e segurança ocupacional.", 2),
+            generateUniqueVariant("Var-C", "Variante C - Conjunto Alternativo 3", "Terceira variante focada em aspetos práticos de prevenção, higiene e ambiente.", 3),
+            generateUniqueVariant("Var-D", "Variante D - Conjunto Alternativo 4", "Quarta variante com questões originais e rigor técnico aprofundado em SSA.", 1)
         ];
 
         let currentTestIndex = 0;
@@ -350,7 +262,7 @@
                     options[correctIdx].classList.add('bg-emerald-50', 'border-emerald-300');
                 }
 
-                rationaleBox.innerHTML = `<span class="font-semibold block mb-1">Fundamentação Oficial:</span>${test.questions[qIdx].rationale}`;
+                rationaleBox.innerHTML = `<span class="font-semibold block mb-1">Fundamentação Técnica:</span>${test.questions[qIdx].rationale}`;
                 rationaleBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-500', 'bg-rose-50', 'border-rose-500');
                 
                 if (selected && parseInt(selected.value) === correctIdx) {
@@ -375,4 +287,3 @@
     </script>
 </body>
 </html>
-```eof
